@@ -9,6 +9,7 @@ const passport = require('passport')
 const methodOverride = require('method-override')
 
 const indexRouter = require('./routes/index')
+const battleTeamRouter = require('./routes/battle-teams')
 
 const app = express()
 
@@ -44,6 +45,8 @@ app.use(function (req, res, next) {
 app.use(express.static(path.join(__dirname, 'public')))
 
 app.use('/', indexRouter)
+// prepend the data the we are routing for to this route
+app.use('/battle-teams', battleTeamRouter)
 
 app.use(function (req, res, next) {
 	next(createError(404))
